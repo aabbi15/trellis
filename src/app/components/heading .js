@@ -10,7 +10,7 @@ function Heading() {
         <br/>
         We have fixed the length of the input bits to 1 for simplification. 
         <br/>
-        The generator matrix is represented as a string of binary numbers, separated by commas. For example, the generator matrix for the rate 1/2 code is "101,111".
+        The generator matrix is represented as a string of binary numbers, separated by commas. For example, the generator matrix for the rate 1/2 code is 101,111.
         </p>
       </div>
     </div>
