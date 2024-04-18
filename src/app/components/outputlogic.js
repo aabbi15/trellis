@@ -4,7 +4,19 @@ function logicfxn(K,k,n,parsedLogic){
 
 
     if(parsedLogic.length != n){
-        console.log("No logic provided");
+        return {err:'Invalid number Generator Matrix'};
+    }
+
+    if(parsedLogic[0].length != K){
+        return {err:'Invalid Generator Matrix'};
+    }
+
+    if(K<=1){
+        return {err:'Invalid Constraint Length'};
+    }
+
+    if(k<=0 || n<=0){ 
+        return {err:'Invalid  Output Length'};
     }
 
     // console.log(K,k,n,parsedLogic);

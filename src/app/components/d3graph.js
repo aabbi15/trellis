@@ -16,33 +16,7 @@ function Graph({ K, k, n, parsedLogic }) {
     }
   }
 
-  function tickfxn() {
-    {
-      // Update positions of normal links
-      link.attr('d', function (d) {
-        if (d.source === d.target) {
-          const x = d.source.x, y = d.source.y;
-          const dx = 20, dy = 20; // Dimensions for the loop
-          return `M ${x},${y} C ${x + dx},${y - dy} ${x + dx},${y + dy} ${x},${y}`;
-        } else {
-          return `M ${d.source.x},${d.source.y} L ${d.target.x},${d.target.y}`;
-        }
-      });
-
-      // Update node positions
-      node.attr('cx', d => d.x)
-        .attr('cy', d => d.y);
-
-      // Update node labels
-      nodeLabels.attr('x', d => d.x + 5)
-        .attr('y', d => d.y);
-
-      // Update branch labels, including self-links
-      text.attr('x', d => d.source.x + 0.75 * (d.target.x - d.source.x))
-        .attr('y', d => d.source.y + 0.75 * (d.target.y - d.source.y) - 5)
-        .attr('fill', d => d.color);
-    }
-  }
+ 
 
 
 
@@ -59,12 +33,14 @@ function Graph({ K, k, n, parsedLogic }) {
       const numNodes = Math.pow(2, k * (K - 1));
 
 
-      const width = 175 * numNodes;
-      const height = 125 * numNodes;
+      const width = 800 + 50 * numNodes;
+      const height = 400 + 40 * numNodes;
 
       // console.log(K, k, n, parsedLogic);
 
       const nodes = logicfxn(K, k, n, parsedLogic);
+
+      
 
       // // console.log(nodes);
 

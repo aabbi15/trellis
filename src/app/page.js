@@ -6,6 +6,8 @@ import React from "react";
 import { useState } from "react";
 import Graph from "./components/d3graph";
 import Graph2 from "./components/graph2";
+import GraphLegend from "./components/legend";
+import Heading from "./components/heading ";
 
 export default function App(){
   const [inputs, setInputs] = useState(null);
@@ -14,9 +16,11 @@ export default function App(){
   // console.log(setInputs);
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
+      <Heading/>
       <InputForm onSubmit={setInputs} />
       {/* {inputs && <TrellisDiagram {...inputs} />} */}
+      {inputs && <GraphLegend/>}
       {inputs && <Graph {...inputs} />}
       {/* {inputs && <Graph2 {...inputs}/> } */}
     </div>
