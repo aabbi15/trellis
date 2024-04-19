@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import logicfxn from './outputlogic';
+import logicfxn from './logicfxn';
+
+
+
 
 function Graph2({ K, k, n, parsedLogic }) {
   const d3Container = useRef(null);

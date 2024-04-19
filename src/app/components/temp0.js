@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
-import logicfxn from './outputlogic';
+import logicfxn from './logicfxn';
 
 
 function TrellisDiagram({ K, k, n, parsedLogic }) {

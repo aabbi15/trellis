@@ -1,32 +1,22 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
-import logicfxn from './outputlogic';
+import logicfxn from './logicfxn';
+
+import color_setter from '../helper/colorsetter';
 
 
 function Graph({ K, k, n, parsedLogic }) {
+
+  //initializes svg
   const d3Container = useRef(null);
-
-
-
-  function color_setter(branch) {
-    if (branch.input == 0) {
-      return 'red';
-    } else {
-      return 'blue';
-    }
-  }
-
- 
-
 
 
   useEffect(() => {
     if (d3Container.current) {
+
+
       // Clear the existing SVG to prevent duplication
       d3.select(d3Container.current).selectAll("*").remove();
-
-
-
 
 
 
@@ -38,7 +28,8 @@ function Graph({ K, k, n, parsedLogic }) {
 
       // console.log(K, k, n, parsedLogic);
 
-      const nodes = logicfxn(K, k, n, parsedLogic);
+      // Get the nodes and links from the logic function
+      const nodes = logicfxn(K, k, n, parsedLogic); 
 
       
 
@@ -47,6 +38,7 @@ function Graph({ K, k, n, parsedLogic }) {
 
       const links = [];
 
+      // Create links from the nodes for each branch for d3
       nodes.forEach(node => {
         node.target.forEach(branch => {
 
@@ -73,13 +65,15 @@ function Graph({ K, k, n, parsedLogic }) {
         .attr('width', width)
         .attr('height', height);
 
-      // Create arrow markers for the links
+
+
+      // Create arrow markers for the links 
       svg.append('defs').selectAll('marker')
         .data(links)
         .enter().append('marker')
         .attr('id', d => `arrow-${d.source}-${d.target}`)
         .attr('viewBox', '0 -5 10 10')
-        .attr('refX', 30) // Adjust this value to position the arrow tip correctly at the end of the link
+        .attr('refX', 30) 
         .attr('refY', -1.5)
         .attr('markerWidth', 5)
         .attr('markerHeight', 5)
@@ -90,6 +84,8 @@ function Graph({ K, k, n, parsedLogic }) {
           else return 'M0,-5L10,0L0,5'})
         .attr('fill', d => d.color);
 
+
+        // [help taken from https://observablehq.com/@harrylove/draw-an-arrowhead-marker-connected-to-a-line-in-d3]
 
   
 
@@ -104,7 +100,10 @@ function Graph({ K, k, n, parsedLogic }) {
         .attr('stroke', d => d.color)
         .attr('fill', 'none')
         .attr('marker-end', d => `url(#arrow-${d.source}-${d.target})`);
-      
+
+
+
+      // Add link labels whihc are the ouput
         var text = svg.selectAll(".link-text")
           .data(links)
           .enter().append("text")
@@ -113,7 +112,7 @@ function Graph({ K, k, n, parsedLogic }) {
 
 
 
-      // Add nodes (circles)
+      // Add nodes whihc are states
       const node = svg.append('g')
         .selectAll('circle')
         .data(nodes)
@@ -124,13 +123,13 @@ function Graph({ K, k, n, parsedLogic }) {
         .attr('fill', 'yellow')
 
 
-      // Labels for nodes
+      // Add labels for nodes whihc are states value
       const nodeLabels = svg.append('g')
         .selectAll('text')
         .data(nodes)
         .join('text')
 
-        .attr('text-anchor', 'middle') // Ensure text is centered on its coordinates
+        .attr('text-anchor', 'middle') 
         .text(d => {
           // console.log(d);
           return d.label
@@ -221,27 +220,34 @@ function Graph({ K, k, n, parsedLogic }) {
     });
 
 
+    //help taken from https://jsfiddle.net/LUrKR/
+
+
 
   const drag = d3.drag()
     .on('start', (event, d) => {
-      if (!event.active) simulation.alphaTarget(0.3).restart();  // Reheat the simulation
-      d.fx = d.x;  // Fix node position on x
-      d.fy = d.y;  // Fix node position on y
+      if (!event.active) simulation.alphaTarget(0.3).restart();  
+      d.fx = d.x;  
+      d.fy = d.y; 
     })
     .on('drag', (event, d) => {
-      d.fx = event.x;
-      d.fy = event.y;
+      d.fx= event.x;
+      d.fy =event.y;
     })
     .on('end', (event, d) => {
       if (!event.active) simulation.alphaTarget(0);
-      d.fx = null;  // Unfix the node position
-      d.fy = null;
+      d.fx=null;  
+      d.fy= null;
     });
 
-  node.call(drag);  // Apply drag behavior to nodes
+
+    // Apply drag behavior to nodes for easire visibility 
+    node.call(drag);  
 
 }
-  }, [K, k, n,parsedLogic]);  // Redraw graph when K, k, or n changes
+
+
+  }, [K, k, n,parsedLogic]); 
 
 return (
   <div ref={d3Container}></div>

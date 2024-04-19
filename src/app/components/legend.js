@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GraphLegend = () => {
+export default function GraphLegend (){
   return (
     <div className="p-4 border rounded shadow-sm bg-gray-50 text-sm">
       <div className="flex items-center mb-2">
@@ -14,5 +14,3 @@ const GraphLegend = () => {
     </div>
   );
 };
-
-export default GraphLegend;
