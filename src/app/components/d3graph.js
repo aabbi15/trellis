@@ -143,7 +143,7 @@ function Graph({ K, k, n, parsedLogic }) {
       // Force simulation for positioning
       const simulation = d3.forceSimulation(nodes)
         .force('link', d3.forceLink(links).id(d => d.id).distance(150))
-        .force('charge', d3.forceManyBody().strength(-2800))
+        .force('charge', d3.forceManyBody().strength(-3000))
         .force('center', d3.forceCenter(width / 2, height / 2))
         .on('tick', () => {
           link.attr('x1', d => d.source.x)

@@ -8,6 +8,7 @@ import Graph from "./components/d3graph";
 
 import GraphLegend from "./components/legend";
 import Heading from "./components/heading";
+import Note from "./components/note";
 
 export default function App(){
   const [inputs, setInputs] = useState(null);
@@ -19,7 +20,9 @@ export default function App(){
     <div className="flex flex-col justify-center items-center">
       <Heading/>
       <InputForm onSubmit={setInputs} />
+
       {inputs && <GraphLegend/>}
+      {inputs && <Note/> }
       {inputs && <Graph {...inputs} />}
       
     </div>
