@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import parseLogic from '../helper/parselogic';
+import encoder_main from '../helper/encoder';
 
 
 
@@ -54,6 +55,7 @@ function InputForm({ onSubmit }) {
 
     // console.log(parsedLogic);
 
+    encoder_main(K,1 ,n,parsedLogic,'100');
 
     onSubmit({ K, k:1, n, parsedLogic });
 

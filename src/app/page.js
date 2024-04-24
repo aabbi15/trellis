@@ -9,6 +9,9 @@ import Graph from "./components/d3graph";
 import GraphLegend from "./components/legend";
 import Heading from "./components/heading";
 import Note from "./components/note";
+import InfoNote from "./components/infonote";
+
+import Inputbox from "./components/inputbox";
 
 export default function App(){
   const [inputs, setInputs] = useState(null);
@@ -19,7 +22,12 @@ export default function App(){
   return (
     <div className="flex flex-col justify-center items-center">
       <Heading/>
+
+      <div className="flex flex-col justify-center items-center">
       <InputForm onSubmit={setInputs} />
+      {/* {inputs && InfoNote({data:inputs})} */}
+      {inputs && <Inputbox/>}
+      </div>
 
       {inputs && <GraphLegend/>}
       {inputs && <Note/> }

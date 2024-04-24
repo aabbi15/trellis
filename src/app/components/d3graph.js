@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 import logicfxn from './logicfxn';
 
 import color_setter from '../helper/colorsetter';
+import { highlightNode, highlightPath } from '../helper/highlighter';
 
 
 function Graph({ K, k, n, parsedLogic }) {
@@ -33,7 +34,7 @@ function Graph({ K, k, n, parsedLogic }) {
 
       
 
-      // // console.log(nodes);
+      console.log(nodes);
 
 
       const links = [];
@@ -96,6 +97,7 @@ function Graph({ K, k, n, parsedLogic }) {
         .data(links)
         .enter().append("path")
         .attr("class", "link")
+        .attr('id', d => `path-${d.source}-${d.target}`)
         .attr('stroke-width', 2)
         .attr('stroke', d => d.color)
         .attr('fill', 'none')
@@ -117,6 +119,7 @@ function Graph({ K, k, n, parsedLogic }) {
         .selectAll('circle')
         .data(nodes)
         .join('circle')
+        .attr('id', d => `node-${d.id}`) 
         .attr('r', 20)
         .attr('stroke', 'black') 
         .attr('stroke-width', 2) 
@@ -138,7 +141,8 @@ function Graph({ K, k, n, parsedLogic }) {
 
       
 
-
+      highlightNode(0);
+      highlightPath(0, 1);
 
       // Force simulation for positioning
       const simulation = d3.forceSimulation(nodes)
