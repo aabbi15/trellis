@@ -26,7 +26,7 @@ export default function App(){
       <div className="flex flex-col justify-center items-center">
       <InputForm onSubmit={setInputs} />
       {/* {inputs && InfoNote({data:inputs})} */}
-      {inputs && <Inputbox/>}
+      {/* {inputs && <Inputbox/>} */}
       </div>
 
       {inputs && <GraphLegend/>}
